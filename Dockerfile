@@ -1,4 +1,3 @@
-
 FROM centos:7
 MAINTAINER KradChen <reinhard1203@163.com>
 
@@ -10,9 +9,10 @@ RUN yum -y install epel-release; yum clean all
 
 # install the nodejs and npm
 
-RUN yum install gcc gcc-c++
-RUN curl -sL https://rpm.nodesource.com/setup_4.x | bash -
-RUN yum install -y nodejs
+RUN yum -y install \
+      nodejs \
+      npm ; \
+    yum -y clean all
 RUN node -v
 RUN npm install express serve-favicon config morgan async node-minify \
     handlebars lodash walk pm2
