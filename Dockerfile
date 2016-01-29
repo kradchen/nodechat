@@ -4,8 +4,8 @@ RUN yum install -y gcc make gcc-c++
 RUN curl -sL https://rpm.nodesource.com/setup_4.x | bash -
 RUN yum install -y nodejs
 RUN node -v
-RUN npm install express serve-favicon config morgan async node-minify \
-    handlebars lodash walk pm2
+RUN npm install express serve-favicon  morgan ejs body-parser \
+    cookie-parser
 
 ADD . /src
 
