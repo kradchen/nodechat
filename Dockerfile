@@ -14,4 +14,4 @@ RUN cd /src
 EXPOSE 1300
 
 
-CMD ["node", "/src/app.js"]
+CMD ["bin/bash"]
