@@ -5,7 +5,7 @@ RUN curl -sL https://rpm.nodesource.com/setup_4.x | bash -
 RUN yum install -y nodejs
 RUN node -v
 RUN npm install express serve-favicon  morgan ejs body-parser \
-    cookie-parser
+    cookie-parser less-middleware
 
 ADD . /src
 
