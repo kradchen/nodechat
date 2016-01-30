@@ -14,4 +14,4 @@ RUN ls -a
 
 
 
-CMD ["nodejs","www.js"]
+CMD ["nodejs","www"]
