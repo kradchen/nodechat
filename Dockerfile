@@ -18,4 +18,4 @@ COPY /views/ /
 EXPOSE 3000
 
 
-CMD ["nodejs","/bin/www.js"]
+CMD echo hello world
