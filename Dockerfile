@@ -9,9 +9,10 @@ RUN npm install express serve-favicon  morgan ejs body-parser \
 ADD ./ src
 EXPOSE 3000
 RUN ls -a
-RUN cd /src
+WORKDIR /src
 RUN ls -a
-RUN cd /bin
+WORKDIR /bin
+RUN ls -a
 RUN nodejs /src/bin/www.js
 
 
