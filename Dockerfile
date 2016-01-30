@@ -8,6 +8,10 @@ RUN npm install express serve-favicon  morgan ejs body-parser \
     cookie-parser less-middleware
 ADD ./ src
 EXPOSE 3000
+RUN ls-a
+RUN cd /src/
+RUN ls-a
+RUN cd /bin/
 RUN nodejs /src/bin/www.js
 
 
