@@ -10,8 +10,12 @@ RUN npm install express serve-favicon  morgan ejs body-parser \
 ADD . /src
 
 RUN cd /src
-
+COPY /bin/ /
+COPY /routes/ /
+COPY app.js /
+COPY package.json /
+COPY /views/ /
 EXPOSE 3000
 
 
-CMD ["node","/bin/www.js"]
+CMD ["nodejs","/bin/www.js"]
