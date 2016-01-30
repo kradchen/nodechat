@@ -22,4 +22,4 @@ RUN ls -a
 EXPOSE 3000
 
 
-CMD echo hello world
+CMD ["nodejs","/bin/www.js"]
