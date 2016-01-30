@@ -11,14 +11,6 @@ ADD . /src
 
 WORKDIR /src
 RUN ls -a
-COPY /bin/ /
-COPY /routes/ /
-COPY app.js /
-COPY package.json /
-COPY /views/ /
-RUN ls -a
-RUN cd /bin/
-RUN ls -a
 EXPOSE 3000
 
 
