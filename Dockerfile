@@ -8,7 +8,11 @@ RUN npm install express serve-favicon  morgan ejs body-parser \
     cookie-parser less-middleware
 RUN ls -a
 RUN ls -F
-EXPOSE 3000
+ADD ./ src
+WORKDIR /src
 
+EXPOSE 3000
+RUN ls -a
+RUN ls -F
 
 CMD ["nodejs","app.js"]
