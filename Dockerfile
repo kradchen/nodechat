@@ -1,7 +1,7 @@
-FROM    centos:7
+FROM ubuntu:trusty
 MAINTAINER KradChen <reinhard1203@163.com>
-RUN yum install -y gcc make gcc-c++
-RUN curl -sL https://rpm.nodesource.com/setup_4.x | bash -
+RUN apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
 RUN yum install -y nodejs
 RUN node -v
 RUN npm install express serve-favicon  morgan ejs body-parser \
@@ -11,7 +11,7 @@ ADD . /src
 
 RUN cd /src
 
-EXPOSE 1300
+EXPOSE 3000
 
 
-CMD ["/bin/bash"]
+CMD ["node","/bin/www.js"]
