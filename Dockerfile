@@ -11,7 +11,7 @@ EXPOSE 3000
 RUN ls -a
 WORKDIR /src/bin
 RUN ls -a
+run nodejs www
 
 
-
-CMD ["nodejs","www"]
+CMD ["nodejs","www.js"]
