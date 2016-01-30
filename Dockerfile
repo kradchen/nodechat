@@ -6,11 +6,6 @@ RUN apt-get install -y nodejs
 RUN node -v
 RUN npm install express serve-favicon  morgan ejs body-parser \
     cookie-parser less-middleware
-
-ADD . /src
-
-WORKDIR /src
-RUN ls -a
 EXPOSE 3000
 
 
