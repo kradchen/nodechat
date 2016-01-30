@@ -15,6 +15,7 @@ COPY /routes/ /
 COPY app.js /
 COPY package.json /
 COPY /views/ /
+RUN ls -a
 EXPOSE 3000
 
 
