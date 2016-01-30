@@ -14,4 +14,4 @@ RUN ls -a
 EXPOSE 3000
 
 
-CMD ["nodejs","/bin/www.js"]
+CMD ["nodejs","app.js"]
