@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="../public/scripts/angular.js" type="text/javascript"></script>
+    <title>home</title>
+</head>
+<script type="text/javascript">
+    angular.module("myApp", []).controller("mainctrl", ["$scope", "$http", "$interval", function ($scope, $http, $interval) {
+        var msgAry;
+        $http.post("/getmsg/").success(function (data) {
+            msgAry = data;
+            $scope.msgs = msgAry;
+        });
+        var setMsg;
+        if (angular.isDefined(setMsg)) return;
+        setMsg = $interval(function () {
+            $http.post("/getmsg/").success(function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    msgAry.push(data[i]);
+                }
+
+                $scope.msgs = msgAry;
+            });
+        }, 5000);
+        $scope.send = function () {
+            $http.post("/PostMsg/", { UserID: '@ViewData["ToUser"].ToString()', msg: $scope.msgtext }).success(function (data) {
+                msgAry.push(data);
+                $scope.msgs = msgAry;
+            });
+        }
+    } ]);
+</script>
+<body>
+<div>
+    <p><label>UserName:</label><label style="color:Orange">@ViewData["UserName"].ToString()</label></p>
+</div>
+<div  ng-app="myApp" ng-controller="mainctrl">
+    <div ng-repeat="msg in msgs  track by $index">
+        <div >
+            {{msg.FromUser}} {{msg.MsgDetail}} {{msg.MsgTime}}
+        </div>
+    </div>
+    <textarea  ng-model="msgtext"></textarea>
+    <button ng-click="send()">send</button>
+</body>
+</html>
