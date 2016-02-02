@@ -7,57 +7,62 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
-     <title>Signin Template for Bootstrap</title>
+    <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../scripts/angular.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        angular.module("myApp", []).controller("mainctrl", ["$scope", "$http", "$interval", function ($scope, $http, $interval) {
+            var msgAry;
+            $http.post("/msg/").success(function (data) {
+                msgAry = data;
+                $scope.msgs = msgAry;
+            });
+            var setMsg;
+            if (angular.isDefined(setMsg)) return;
+            setMsg = $interval(function () {
+                $http.post("/msg/").success(function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        msgAry.push(data[i]);
+                    }
+
+                    $scope.msgs = msgAry;
+                });
+            }, 5000);
+            $scope.send = function () {
+                $http.post("/msg/send/", { msgDetail: $scope.msgtext, msgWriter:'admin',msgReceiver:'client'}).success(function (data) {
+                    msgAry.push(data);
+                    $scope.msgs = msgAry;
+                });
+            }
+        } ]);
+    </script>
 </head>
 <body>
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
-            <h3>
+            <legend>
                 聊天窗口
-            </h3>
+            </legend>
         </div>
     </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <dl>
-                <dt>
-                    Rolex
-                </dt>
-                <dd>
-                    劳力士创始人为汉斯.威尔斯多夫，1908年他在瑞士将劳力士注册为商标。
-                </dd>
-                <dt>
-                    Vacheron Constantin
-                </dt>
-                <dd>
-                    始创于1775年的江诗丹顿已有250年历史，
-                </dd>
-                <dd>
-                    是世界上历史最悠久、延续时间最长的名表之一。
-                </dd>
-                <dt>
-                    IWC
-                </dt>
-                <dd>
-                    创立于1868年的万国表有“机械表专家”之称。
-                </dd>
-                <dt>
-                    Cartier
-                </dt>
-                <dd>
-                    卡地亚拥有150多年历史，是法国珠宝金银首饰的制造名家。
-                </dd>
-            </dl>
-            <form>
-                <fieldset>
-                    <legend>表单项</legend> <label>表签名</label><input type="text" /> <span class="help-block">这里填写帮助信息.</span> <label class="checkbox"><input type="checkbox" /> 勾选同意</label> <button type="submit" class="btn">提交</button>
-                </fieldset>
-            </form>
+    <div class="row-fluid" ng-app="myApp" ng-controller="mainctrl">
+        <div class="span12" style="width: 100%;padding-left: 20px;overflow-y:scroll; width: 80%;min-height: 400px;border:1px groove black;">
+        <dl ng-repeat="msg in msgs track by $index" >
+        <dt>
+            {{msg.msgWriter}} {{msg.msgTime}}
+        </dt>
+        <dd>{{msg.msgDetail}}
+        </dd>
+        </dl>
+
         </div>
+        <fieldset>
+            <textarea ng-model="msgtext" style="width: 80%; min-height: 300px;overflow-y:scroll;" ></textarea>
+        </fieldset>
+        <button type="submit" ng-click="send()" class="btn">提交</button>
     </div>
     <div class="row-fluid">
         <div class="span12">

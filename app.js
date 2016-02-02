@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var chat = require('./routes/chat');
+var msg = require('./routes/msg');
 var app = express();
 
 // view engine setup
@@ -23,10 +24,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
-
+//设置路由
 app.use('/', routes);
 app.use('/users', users);
-
+app.use('/chat',chat);
+app.use('/msg',msg);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

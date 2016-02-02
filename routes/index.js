@@ -1,12 +1,18 @@
 var express = require('express');
 var router = express.Router();
-
+var Users =[{UserID:"admin",Pwd:"admin"},{UserID:"client",Pwd:"client"}];
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('login');
 });
 router.post('/', function(req, res, next) {
-  console.log(req.body.UserID);
-  console.log(req.body.Pwd);
+  for(var i=0;i<Users.length;i++) {
+    if(Users[i].UserID == req.body.UserID && Users[i].Pwd == req.body.Pwd) {
+      res.cookie('loginFlag', '1', {expires: new Date(Date.now() + 900000), httpOnly: true});
+      res.redirect('/chat/');
+      return;
+    }
+  }
+  res.render('login');
 });
 module.exports = router;
