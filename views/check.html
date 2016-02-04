@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../scripts/angular.js" type="text/javascript"></script>
+    </head>
+<script>
+
+    angular.module("myApp", []).controller("mainctrl", ["$scope", "$http", function ($scope, $http) {
+        var msgAry;
+        $scope.checkin = function () {
+            $http.post("/check/in/",{}).success(function (data) {
+                msgAry = data;
+                $scope.msgs = msgAry;
+            });
+        };
+        $scope.checkout = function () {
+            $http.post("/check/out/",{}).success(function (data) {
+                msgAry = data;
+                $scope.msgs = msgAry;
+            });
+        };
+    } ]);
+</script>
+<body ng-app="myApp" ng-controller="mainctrl">
+    <button  ng-click="checkin()" type="submit"  class="btn">签到，查询状态（8点-下班）！</button>
+    <button   ng-click="checkout()" type="submit"  class="btn">签退，查询状态（下班-隔天8点）！</button>
+
+    <dl ng-repeat="msg in msgs track by $index" >
+        <dt>
+            {{msg.StatusCode}}
+        </dt>
+        <dd>{{msg.ResultMessage}}
+        </dd>
+    </dl>
+</body>
+</html>

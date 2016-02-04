@@ -9,7 +9,7 @@ router.post('/', function(req, res, next) {
   for(var i=0;i<Users.length;i++) {
     if(Users[i].UserID == req.body.UserID && Users[i].Pwd == req.body.Pwd) {
       res.cookie('loginFlag', '1', {expires: new Date(Date.now() + 900000), httpOnly: true});
-      res.redirect('/chat/');
+      res.redirect('/check/');
       return;
     }
   }
