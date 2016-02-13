@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 var low = require('lowdb');
 var storage = require('lowdb/file-async');
-var db = low('../chatdb/db.json', { storage });
+var db = low('/db.json', { storage });
 router.post('/', function(req, res) {
     var post;
     if (req.body.lastTime != undefined) {

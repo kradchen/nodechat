@@ -3,8 +3,11 @@
  */
 var express = require('express');
 var router = express.Router();
-var http = require('https');
-function Communicate(dre,pres)
+var http = require('http');
+var low = require('lowdb');
+var storage = require('lowdb/file-async');
+var db = low('/db.json', { storage });
+function Communicate(dre)
 {
     var options;
     var names = [
@@ -14,17 +17,16 @@ function Communicate(dre,pres)
         {Name:"330125197311082551",Pwd:"123456"},
         {Name:"330125197704200037",Pwd:"123456"},
         {Name:"330106198412035215",Pwd:"654321"}];
-    if(dre =='in8'){
+    if(dre =='in'){
         options =
         {
             hostname : '218.108.75.59',
-            port : 80,
+            port : 88,
             method : 'POST',
-            path : '/login/login/',
-            header:{}
+            path : '/cl/login/'
         };
     }
-    if(dre =='out'){
+    else if(dre =='out'){
         options =
         {
             hostname : '218.108.75.59',
@@ -43,22 +45,21 @@ function Communicate(dre,pres)
             path : '/cl/testconn/trans/'
         };
     }
-
+    console.log('options: ' + JSON.stringify(options));
     var req = http.request(options,function(res){
         console.log('STATUS: ' + res.statusCode);
-        equal(200, res.statusCode);
         console.log('HEADERS: ' + JSON.stringify(res.headers));
 
         res.on('data',function (chunk) {
             console.log('BODY: ' + chunk);
+            db('ckMessages').push(chunk);
         });
         res.on("end",function(res,pres){
-            pres.json(res.body);
         });
     });
 
     var data = {tranStr:"hello world"};
-    req.write(require('querystring').stringify(data));
+    req.write(require('querystring').stringify(names));
     req.end();
 }
 router.get('/', function(req, res) {
@@ -71,7 +72,7 @@ router.get('/', function(req, res) {
 
 router.post('/in/',function(req, res) {
     if(req.cookies.loginFlag=='1') {
-        Communicate('in',res);
+        Communicate('in');
         return ;
     }
     res.redirect('/');

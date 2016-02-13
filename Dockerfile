@@ -4,9 +4,10 @@ RUN apt-get install -y curl
 RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
 RUN apt-get install -y nodejs
 RUN node -v
-RUN npm install express serve-favicon  morgan ejs body-parser \
-    cookie-parser less-middleware debug
 ADD ./ src
 EXPOSE 3000
-WORKDIR /src/bin
+WORKDIR /src
+RUN npm init -y
+WORKDIR /bin
+
 CMD ["nodejs","www"]
