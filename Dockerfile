@@ -7,7 +7,7 @@ RUN node -v
 ADD ./ src
 EXPOSE 3000
 WORKDIR /src
-RUN npm init -y
-WORKDIR /bin
-
+RUN npm install
+WORKDIR /src/bin
+RUN ls -a
 CMD ["nodejs","www"]
