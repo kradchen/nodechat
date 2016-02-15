@@ -47,8 +47,8 @@
 
 </script>
 <body ng-app="myApp" ng-controller="mainctrl">
-    <button style="<%= btnFlag?'display:none':''%>"  ng-click="checkin()" type="submit"  >签到，查询状态（8点-下班）！</button>
-    <button style="<%= !btnFlag?'display:none':''%>"  ng-click="checkout()" type="submit"  >签退，查询状态（下班-隔天8点）！</button>
+    <button style="<%= (!btnFlag)?'display:none':''%>"  ng-click="checkin()" type="submit"  >签到，查询状态（8点-下班）！</button>
+    <button style="<%= btnFlag?'display:none':''%>"  ng-click="checkout()" type="submit"  >签退，查询状态（下班-隔天8点）！</button>
 
     <dl ng-repeat="msg in msgs track by $index" >
         <dt>
