@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Users =[{UserID:"admin",Pwd:"admin"},{UserID:"client",Pwd:"client"}];
+var Users =[{UserID:"admin",Pwd:"ywjyk123456"}];
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('login');

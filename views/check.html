@@ -7,10 +7,10 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Signin Template for Bootstrap</title>
+    <title>一键签到签退</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
     <script src="../scripts/angular.js" type="text/javascript"></script>
     </head>
 <script>
@@ -47,8 +47,8 @@
 
 </script>
 <body ng-app="myApp" ng-controller="mainctrl">
-    <button style="<%= !btnFlag?'display:none':''%>"  ng-click="checkin()" type="submit"  class="btn">签到，查询状态（8点-下班）！</button>
-    <button style="<%= btnFlag?'display:none':''%>"  ng-click="checkout()" type="submit"  class="btn">签退，查询状态（下班-隔天8点）！</button>
+    <button style="<%= btnFlag?'display:none':''%>"  ng-click="checkin()" type="submit"  >签到，查询状态（8点-下班）！</button>
+    <button style="<%= !btnFlag?'display:none':''%>"  ng-click="checkout()" type="submit"  >签退，查询状态（下班-隔天8点）！</button>
 
     <dl ng-repeat="msg in msgs track by $index" >
         <dt>

@@ -8,8 +8,8 @@ var low = require('lowdb');
 var storage = require('lowdb/file-sync');
 var db = low('db.json', { storage });
 function Communicate(dre) {
-    var usernames = "330106196802020028;330106197112280062;330125197812250728;330125197311082551;330125197704200037;330106198412035215";
-    var pwd="123456;123456;123456;123456;123456;654321";
+    var usernames = "330106196802020028;330106197112280062;330125197812250728;330125197704200037;330106198412035215";
+    var pwd="123456;123456;123456;123456;654321";
     if (dre == 'in') {
         request.post("http://218.108.75.59:88/cl/login/",
             {form: {userNames: usernames, pwds:pwd}},
