@@ -14,22 +14,37 @@
     <script src="../scripts/angular.js" type="text/javascript"></script>
     </head>
 <script>
-
+    var msgAry = new Array();
     angular.module("myApp", []).controller("mainctrl", ["$scope", "$http", function ($scope, $http) {
-        var msgAry;
-        $scope.checkin = function () {
-            $http.post("/check/in/",{}).success(function (data) {
-                msgAry = data;
-                $scope.msgs = msgAry;
+        var getMsg =function () {
+            $http.get("/check/msg/").success(function (data) {
+                if (data.length > 0) {
+                        for (var i = 0; i < data[0].length; i++) {
+                            msgAry.push(data[0][i]);
+
+                        }
+                    $scope.msgs = msgAry;
+                }
+                else {
+                    getMsg();
+                }
             });
         };
-        $scope.checkout = function () {
-            $http.post("/check/out/",{}).success(function (data) {
-                msgAry = data;
+        $scope.checkin = function () {
+            $http.post("/check/in/",{}).success(function (data) {
+                msgAry.push(data);
                 $scope.msgs = msgAry;
+                getMsg();
+            });
+        };
+        $scope.checkout = function ($scope,$http) {
+            $http.post("/check/out/",{}).success(function () {
+                getMsg();
             });
         };
     } ]);
+
+
 </script>
 <body ng-app="myApp" ng-controller="mainctrl">
     <button  ng-click="checkin()" type="submit"  class="btn">签到，查询状态（8点-下班）！</button>
