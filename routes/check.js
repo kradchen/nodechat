@@ -55,7 +55,9 @@ function Communicate(dre) {
 }
 router.get('/', function(req, res) {
     if(req.cookies.loginFlag=='1') {
-        res.render('check');
+        var i = new Date().getHours();
+        var btnshow = i<17 && i>7;
+        res.render('check',{btnFlag:btnshow});
         return ;
     }
     res.redirect('/');
