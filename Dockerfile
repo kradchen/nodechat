@@ -9,5 +9,5 @@ EXPOSE 3000
 WORKDIR /src
 RUN npm init -y
 WORKDIR /bin
-
+RUN ls -a
 CMD ["nodejs","www"]
