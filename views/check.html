@@ -37,8 +37,10 @@
                 getMsg();
             });
         };
-        $scope.checkout = function ($scope,$http) {
-            $http.post("/check/out/",{}).success(function () {
+        $scope.checkout = function () {
+            $http.post("/check/out/",{}).success(function (data) {
+                msgAry.push(data);
+                $scope.msgs = msgAry;
                 getMsg();
             });
         };

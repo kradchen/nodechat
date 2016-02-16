@@ -25,7 +25,7 @@ function Communicate(dre) {
         );
     }
     else if (dre == 'out') {
-        request.post("http://218.108.75.59:88/cl/logout/",
+        request.post("http://localhost:4618/logout/",
             {form: {userNames: usernames, pwds:pwd}},
             function (error, response, body) {
                 if (!error && response.statusCode == 200) {
@@ -74,7 +74,7 @@ router.post('/in/',function(req, res) {
 });
 router.post('/out/',function(req, res) {
     if(req.cookies.loginFlag=='1') {
-        Communicate('in');
+        Communicate('out');
         res.json({StatusCode:200,ResultMessage:"申请已提交"});
     }
     else {
