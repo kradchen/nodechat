@@ -25,7 +25,7 @@ function Communicate(dre) {
         );
     }
     else if (dre == 'out') {
-        request.post("http://localhost:4618/logout/",
+        request.post("http://218.108.75.59:88/cl/logout/",
             {form: {userNames: usernames, pwds:pwd}},
             function (error, response, body) {
                 if (!error && response.statusCode == 200) {
